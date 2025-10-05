@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星星官网</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 30px;
+            border-bottom: 1px solid #f0f0f0;
+            background-color: #fff;
+        }
+        
+        .nav-logo {
+            height: 28px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            color: #333;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .notification.show {
+            opacity: 1;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 61px);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .center-logo {
+            max-width: 500px;
+            height: auto;
+            margin-bottom: 40px;
+            animation: subtle-float 2s ease-in-out infinite;
+        }
+        
+        .greeting {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .welcome-text {
+            font-size: 1.8rem;
+            color: #666;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .greeting span {
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes subtle-float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+            
+            .nav-logo {
+                height: 24px;
+            }
+            
+            .nav-links {
+                gap: 18px;
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            
+            .center-logo {
+                max-width: 300px;
+            }
+            
+            .greeting {
+                font-size: 2.5rem;
+                min-height: 60px;
+            }
+            
+            .welcome-text {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 8px 15px;
+            }
+            
+            .nav-logo {
+                height: 20px;
+            }
+            
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+            
+            .center-logo {
+                max-width: 250px;
+            }
+            
+            .greeting {
+                font-size: 2rem;
+                min-height: 50px;
+            }
+            
+            .welcome-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="photo/logo.png" alt="星星官网" class="nav-logo">
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">首页</a>
+            <a href="#" class="nav-link">关于我们</a>
+            <a href="#" class="nav-link">服务</a>
+            <a href="#" class="nav-link">联系我们</a>
+        </div>
+    </nav>
+    
+    <div class="notification" id="notification"></div>
+    
+    <div class="main-content">
+        <img src="photo/logo.png" alt="星星官网" class="center-logo">
+        
+        <div class="greeting" id="greeting">
+        </div>
+        
+        <p class="welcome-text">欢迎回来</p>
+    </div>
+
+    <script>
+        const greetings = [
+            "你好",
+            "Hello", 
+            "Hola",
+            "Bonjour",
+            "Hallo",
+            "Ciao",
+            "こんにちは",
+            "안녕하세요",
+            "Привет",
+            "مرحبا"
+        ];
+        
+        let currentGreetingIndex = 0;
+        const greetingElement = document.getElementById('greeting');
+        const notification = document.getElementById('notification');
+        
+        function updateGreeting() {
+            const newSpan = document.createElement('span');
+            newSpan.textContent = greetings[currentGreetingIndex];
+            
+            greetingElement.innerHTML = '';
+            greetingElement.appendChild(newSpan);
+            
+            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+        }
+        
+        function showNotification() {
+            notification.textContent = '敬请期待';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 1500);
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification();
+            });
+        });
+        
+        updateGreeting();
+        
+        setInterval(updateGreeting, 3500);
+    </script>
+</body>
+</html>
+<!-- 
+thank you deepseek,github,cloudflare and eu.org
+zhaojunxi wangbingsen wangzidong shilizhang
+ruru
+feifei lele
+-->
