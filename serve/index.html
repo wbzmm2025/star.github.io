@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="星星官网 - 专业、创新的服务体验">
+    <title>星星官网 - 服务</title>
+    <style>
+        :root {
+            --text-dark: #1d1d1f;
+            --text-gray: #6e6e73;
+            --text-light: #666;
+            --border-light: #d2d2d6;
+            --bg-gray: #f5f5f7;
+            --nav-bg: #ffffff;
+            --white: #fff;
+            --footer-bg: #f5f5f7;
+            --notification-bg: rgba(0, 0, 0, 0.8);
+            --transition-speed: 0.3s;
+            --nav-link-size: 1.1rem;
+            --notification-size: 1.35rem;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --btn-blue: #007aff;
+            --btn-blue-hover: #0051d5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-gray);
+        }
+        
+        .globalnav {
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            border-bottom: 1px solid var(--border-light);
+            background-color: var(--nav-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .globalnav-logo {
+            height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+        
+        .globalnav-links {
+            display: flex;
+            gap: 25px;
+            height: 44px;
+            align-items: center;
+        }
+        
+        .globalnav-link {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: var(--nav-link-size);
+            transition: color var(--transition-speed);
+            padding: 0;
+            cursor: pointer;
+            border-radius: 4px;
+            line-height: 44px;
+            display: inline-block;
+        }
+        
+        .globalnav-link:hover {
+            color: var(--text-dark);
+        }
+        
+        .globalnav-link:focus-visible {
+            outline: 2px solid var(--text-dark);
+            outline-offset: 2px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            min-height: 180px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-image {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-info {
+            flex: 1;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+        
+        .download-btn {
+            flex-shrink: 0;
+            background-color: var(--btn-blue);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--btn-blue-hover);
+        }
+        
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+        
+        .footer {
+            background-color: var(--footer-bg);
+            padding: 40px 30px 25px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .footer-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            transition: color var(--transition-speed);
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .footer-social a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 1rem;
+            transition: color var(--transition-speed);
+        }
+        
+        .footer-social a:hover {
+            color: var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 8px;
+        }
+        
+        .thanks {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 734px) {
+            .globalnav {
+                height: 48px;
+                padding: 0 20px;
+            }
+            
+            .globalnav-logo {
+                height: 48px;
+            }
+            
+            .nav-logo {
+                height: 48px;
+            }
+            
+            .globalnav-links {
+                height: 48px;
+                gap: 18px;
+            }
+            
+            .globalnav-link {
+                font-size: 1rem;
+                line-height: 48px;
+            }
+            
+            .main-content {
+                padding: 40px 20px;
+            }
+            
+            .cards-container {
+                gap: 20px;
+            }
+            
+            .service-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .card-image {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 10px;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .download-btn {
+                margin-top: 12px;
+                padding: 8px 24px;
+                white-space: nowrap;
+            }
+            
+            .footer {
+                padding: 30px 20px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .globalnav {
+                height: 48px;
+                padding: 0 15px;
+            }
+            
+            .globalnav-links {
+                gap: 14px;
+            }
+            
+            .globalnav-link {
+                font-size: 0.95rem;
+                line-height: 48px;
+            }
+            
+            .main-content {
+                padding: 30px 15px;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .card-description {
+                font-size: 0.8rem;
+            }
+            
+            .download-btn {
+                font-size: 0.8rem;
+                padding: 8px 20px;
+            }
+            
+            .footer {
+                padding: 25px 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="globalnav">
+        <div class="globalnav-logo">
+            <img src="photo/logo.png" alt="星星官网标志" class="nav-logo" loading="lazy">
+        </div>
+        <div class="globalnav-links">
+            <a href="../index.html" class="globalnav-link" id="home-link" aria-label="首页">首页</a>
+            <a href="#" class="globalnav-link" id="about-link" aria-label="关于我们">关于我们</a>
+            <a href="#" class="globalnav-link" id="service-link" aria-label="服务">服务</a>
+            <a href="#" class="globalnav-link" id="contact-link" aria-label="联系我们">联系我们</a>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div class="cards-container">
+            <div class="service-card">
+                <div class="card-image">
+                    <img src="photo/starprotext.png" alt="Star维护太空" onerror="this.src='https://placehold.co/120x120/f0f0f0/666?text=StarProText'">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-title">Star维护太空 beta3.0</h2>
+                    <p class="card-description">维护太空秩序，探索宇宙奥秘</p>
+                </div>
+                <button class="download-btn" id="downloadStarProBtn">下载</button>
+            </div>
+            
+            <div class="service-card">
+                <div class="card-image">
+                    <img src="photo/starlink.png" alt="StarLink" onerror="this.src='https://placehold.co/120x120/f0f0f0/666?text=StarLink'">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-title">StarLink beta1.0</h2>
+                    <p class="card-description">星际连接，畅享无限可能</p>
+                </div>
+                <button class="download-btn" id="downloadStarLinkBtn">下载</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">探索</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">首页</a></li>
+                    <li><a href="#" class="footer-link" id="footer-about-link">关于我们</a></li>
+                    <li><a href="#" class="footer-link" id="footer-service-link">服务</a></li>
+                    <li><a href="#" class="footer-link" id="footer-contact-link">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">关注我们</h3>
+                <div class="footer-social">
+                    <a href="#" id="douyin-link" target="_blank" rel="noopener noreferrer" aria-label="抖音">抖音</a>
+                    <a href="#" id="github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 星星官网. 保留所有权利。</p>
+            <div class="thanks">
+                感谢 deepseek, github, cloudflare, eu.org<br>
+                zhaojunxi, wangbingsen, wangzidong, shilizhang<br>
+                ruru, feifei, lele
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            function scrollToFooter() {
+                const footer = document.querySelector('.footer');
+                if (footer) {
+                    footer.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            function downloadStarProText() {
+                const link = document.createElement('a');
+                link.href = './setup/StarProTextSetupBeta3.0.exe';
+                link.download = 'StarProTextSetupBeta3.0.exe';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            function downloadStarLink() {
+                const link = document.createElement('a');
+                link.href = './setup/StarLinkSetup.exe';
+                link.download = 'StarLinkSetup.exe';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            const douyinUrl = 'https://www.douyin.com/user/MS4wLjABAAAASkP1rl3lePnPAJcRz-M6INTL8-ZDWvJEXXUiWe1KAlXclwL1qcGjjyotx4NvjLCf?from_tab_name=main';
+            const githubUrl = 'https://github.com/wbzmm2025/star.github.io';
+            
+            const aboutLink = document.getElementById('about-link');
+            const serviceLink = document.getElementById('service-link');
+            const contactLink = document.getElementById('contact-link');
+            
+            const footerAboutLink = document.getElementById('footer-about-link');
+            const footerServiceLink = document.getElementById('footer-service-link');
+            const footerContactLink = document.getElementById('footer-contact-link');
+            
+            const douyinLink = document.getElementById('douyin-link');
+            const githubLink = document.getElementById('github-link');
+            
+            const downloadStarProBtn = document.getElementById('downloadStarProBtn');
+            const downloadStarLinkBtn = document.getElementById('downloadStarLinkBtn');
+            
+            if (aboutLink) {
+                aboutLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToFooter();
+                });
+            }
+            
+            if (footerAboutLink) {
+                footerAboutLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToFooter();
+                });
+            }
+            
+            if (serviceLink) {
+                serviceLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToTop();
+                });
+            }
+            
+            if (footerServiceLink) {
+                footerServiceLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToTop();
+                });
+            }
+            
+            if (contactLink) {
+                contactLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToFooter();
+                });
+            }
+            
+            if (footerContactLink) {
+                footerContactLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToFooter();
+                });
+            }
+            
+            if (douyinLink) {
+                douyinLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.open(douyinUrl, '_blank');
+                });
+            }
+            
+            if (githubLink) {
+                githubLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.open(githubUrl, '_blank');
+                });
+            }
+            
+            if (downloadStarProBtn) {
+                downloadStarProBtn.addEventListener('click', () => {
+                    downloadStarProText();
+                });
+            }
+            
+            if (downloadStarLinkBtn) {
+                downloadStarLinkBtn.addEventListener('click', () => {
+                    downloadStarLink();
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
