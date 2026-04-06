@@ -408,7 +408,7 @@
         <div class="cards-container">
             <div class="service-card">
                 <div class="card-image">
-                    <img src="photo/starprotext.png" alt="Star维护太空" onerror="this.src='https://placehold.co/120x120/f0f0f0/666?text=StarProText'">
+                    <img src="photo/starprotext.png" alt="Star维护太空" onerror="this.src='https://placehold.co/120x120/f0f0f0/666?text=StarProtext'">
                 </div>
                 <div class="card-info">
                     <h2 class="card-title">Star维护太空 beta3.0</h2>
@@ -460,10 +460,10 @@
                 }
             }
             
-            function downloadStarProText() {
+            function downloadStarProtext() {
                 const link = document.createElement('a');
-                link.href = './setup/StarProTextSetupBeta3.0.exe';
-                link.download = 'StarProTextSetupBeta3.0.exe';
+                link.href = './setup/StarProtextSetupBeta3.0.exe';
+                link.download = 'StarProtextSetupBeta3.0.exe';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -543,7 +543,7 @@
             
             if (downloadStarProBtn) {
                 downloadStarProBtn.addEventListener('click', () => {
-                    downloadStarProText();
+                    downloadStarProtext();
                 });
             }
         })();
