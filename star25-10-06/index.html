@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星星官网 - 中秋快乐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a4a 0%, #2d2d6b 30%, #3a3a8a 70%, #4a4aaa 100%);
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .moon-egg {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 35% 35%, #fff9c4 0%, #ffeb3b 20%, #ffb300 60%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 235, 59, 0.6), 0 0 100px rgba(255, 193, 7, 0.3);
+            animation: moon-glow 4s ease-in-out infinite alternate;
+            z-index: 9999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .moon-egg:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 80px rgba(255, 235, 59, 0.9), 0 0 150px rgba(255, 193, 7, 0.6), 0 0 200px rgba(255, 235, 59, 0.4);
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+
+        @keyframes moon-glow {
+            0% { box-shadow: 0 0 40px rgba(255, 235, 59, 0.4), 0 0 80px rgba(255, 193, 7, 0.2); }
+            100% { box-shadow: 0 0 80px rgba(255, 235, 59, 0.8), 0 0 140px rgba(255, 193, 7, 0.4); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .star-logo {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            backdrop-filter: blur(20px);
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.3), inset -2px -2px 4px rgba(0, 0, 0, 0.2), 0 4px 15px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .star-logo::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: transparent;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .star-logo:hover::before {
+            box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+        }
+
+        .star-logo:hover {
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 235, 59, 0.6), 0 4px 15px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 235, 59, 0.5);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 6px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a:hover {
+            color: #ffeb3b;
+            background: rgba(255, 235, 59, 0.15);
+            border-color: rgba(255, 235, 59, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 235, 59, 0.2);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 235, 59, 0.95);
+            backdrop-filter: blur(20px);
+            color: #333;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 57px);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .center-star {
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.9);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            backdrop-filter: blur(25px);
+            margin-bottom: 40px;
+            animation: star-float 3s ease-in-out infinite;
+            box-shadow: inset 4px 4px 8px rgba(255, 255, 255, 0.4), inset -4px -4px 8px rgba(0, 0, 0, 0.2), 0 8px 30px rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .center-star::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: transparent;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .center-star:hover::before {
+            box-shadow: 0 0 40px rgba(255, 235, 59, 0.9);
+        }
+
+        .center-star:hover {
+            box-shadow: inset 4px 4px 8px rgba(255, 255, 255, 0.5), inset -4px -4px 8px rgba(0, 0, 0, 0.2), 0 0 50px rgba(255, 235, 59, 0.8), 0 8px 30px rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 235, 59, 0.7);
+        }
+
+        @keyframes star-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .greeting {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .greeting-text {
+            color: #ffeb3b;
+            text-shadow: 0 0 20px rgba(255, 235, 59, 0.8), 0 0 40px rgba(255, 235, 59, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 15px;
+            animation: text-rise 1s ease-out;
+        }
+
+        @keyframes text-rise {
+            0% { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(6px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+        }
+
+        .welcome-text {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .mooncake {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .moving-clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: cloud-drift linear infinite;
+        }
+
+        @keyframes cloud-drift {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        .poem-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            color: #ffeb3b;
+            padding: 30px 40px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 2;
+            text-align: center;
+            z-index: 10000;
+            opacity: 0;
+            box-shadow: 0 0 40px rgba(255, 235, 59, 0.4), inset 2px 2px 5px rgba(255, 255, 255, 0.1), inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 235, 59, 0.3);
+            animation: poem-appear 0.8s ease-out forwards;
+            max-width: 600px;
+            min-width: 400px;
+        }
+
+        @keyframes poem-appear {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes poem-disappear {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="moon-egg" id="moonEgg" onclick="showRandomPoem()"></div>
+    
+    <div class="moving-clouds" id="movingClouds"></div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="star-logo"></div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">首页</a>
+            <a href="#" class="nav-link">关于我们</a>
+            <a href="#" class="nav-link">服务</a>
+            <a href="#" class="nav-link">联系我们</a>
+        </div>
+    </nav>
+    
+    <div class="notification" id="notification"></div>
+    
+    <div class="main-content">
+        <div class="center-star"></div>
+        
+        <div class="greeting" id="greeting">
+            <span class="greeting-text" id="greetingText"></span>
+        </div>
+        
+        <p class="welcome-text">中秋快乐 · 欢迎回来</p>
+        <p class="mooncake">🥮 月圆人团圆 · 千里共婵娟 🥮</p>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 80;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 4;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${left}%`;
+                star.style.top = `${top}%`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function createMovingClouds() {
+            const movingContainer = document.getElementById('movingClouds');
+            const cloudCount = 4;
+            
+            for (let i = 0; i < cloudCount; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                
+                const width = Math.random() * 120 + 80;
+                const height = width * 0.4;
+                const top = Math.random() * 70 + 15;
+                const duration = Math.random() * 40 + 50;
+                const delay = Math.random() * 20;
+                
+                cloud.style.width = `${width}px`;
+                cloud.style.height = `${height}px`;
+                cloud.style.top = `${top}%`;
+                cloud.style.left = `-${width}px`;
+                cloud.style.animationDuration = `${duration}s`;
+                cloud.style.animationDelay = `${delay}s`;
+                
+                movingContainer.appendChild(cloud);
+            }
+        }
+
+        const moonPoems = [
+            "明月几时有？把酒问青天。\n不知天上宫阙，今夕是何年。",
+            "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。",
+            "海上生明月，天涯共此时。\n情人怨遥夜，竟夕起相思。",
+            "春江潮水连海平，海上明月共潮生。\n滟滟随波千万里，何处春江无月明！",
+            "小时不识月，呼作白玉盘。\n又疑瑶台镜，飞在青云端。",
+            "露从今夜白，月是故乡明。\n有弟皆分散，无家问死生。",
+            "月上柳梢头，人约黄昏后。\n今年元夜时，月与灯依旧。",
+            "明月松间照，清泉石上流。\n竹喧归浣女，莲动下渔舟。",
+            "举杯邀明月，对影成三人。\n月既不解饮，影徒随我身。",
+            "月落乌啼霜满天，江枫渔火对愁眠。\n姑苏城外寒山寺，夜半钟声到客船。"
+        ];
+
+        function showRandomPoem() {
+            const randomPoem = moonPoems[Math.floor(Math.random() * moonPoems.length)];
+            
+            const poemPopup = document.createElement('div');
+            poemPopup.className = 'poem-popup';
+            poemPopup.textContent = randomPoem;
+            poemPopup.style.whiteSpace = 'pre-line';
+            
+            document.body.appendChild(poemPopup);
+            
+            setTimeout(() => {
+                poemPopup.style.animation = 'poem-disappear 0.8s ease-out forwards';
+                setTimeout(() => {
+                    if (document.body.contains(poemPopup)) {
+                        document.body.removeChild(poemPopup);
+                    }
+                }, 800);
+            }, 3000);
+        }
+
+        const greetings = [
+            "中秋快乐",
+            "中秋安康", 
+            "月圆人团圆",
+            "花好月圆夜",
+            "阖家欢乐",
+            "千里共婵娟",
+            "明月寄相思",
+            "佳节共赏月",
+            "团圆美满",
+            "幸福安康"
+        ];
+        
+        let currentGreetingIndex = 0;
+        const greetingTextElement = document.getElementById('greetingText');
+        const notification = document.getElementById('notification');
+        
+        function updateGreeting() {
+            const greetingText = greetings[currentGreetingIndex];
+            
+            greetingTextElement.classList.remove('greeting-text');
+            void greetingTextElement.offsetWidth;
+            
+            greetingTextElement.textContent = greetingText;
+            
+            greetingTextElement.classList.add('greeting-text');
+            
+            currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+        }
+        
+        function showNotification() {
+            notification.textContent = '中秋快乐 · 敬请期待';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 1500);
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification();
+            });
+        });
+        
+        createStars();
+        createMovingClouds();
+        updateGreeting();
+        setInterval(updateGreeting, 2000);
+    </script>
+</body>
+</html>
+
+<!-- 
+thank you deepseek,github,cloudflare and eu.org
+zhaojunxi wangbingsen wangzidong
+ruru
+feifei lele
+-->

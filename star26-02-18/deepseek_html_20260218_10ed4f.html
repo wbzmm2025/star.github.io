@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星星官网 · 新年快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'HarmonyOS Sans';
+            src: url('https://cdn.jsdelivr.net/npm/harmonyos-sans-chinese@1.0.0/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(145deg, #fce5cf 0%, #fecfbc 30%, #fee3b8 70%, #ffd5aa 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 30%, rgba(255, 200, 150, 0.25) 0px, transparent 8%),
+                              radial-gradient(circle at 90% 70%, rgba(255, 180, 130, 0.3) 0px, transparent 15%),
+                              radial-gradient(circle at 40% 80%, rgba(255, 220, 160, 0.2) 0px, transparent 10%),
+                              radial-gradient(circle at 70% 20%, #ffccaa30 0px, transparent 12%),
+                              radial-gradient(circle at 10% 85%, #ffbbaac0 0px, transparent 8%),
+                              repeating-linear-gradient(45deg, rgba(255, 200, 150, 0.1) 0px, rgba(255, 200, 150, 0.1) 2px, transparent 2px, transparent 6px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 57px;
+            background: rgba(255, 240, 225, 0.38);
+            backdrop-filter: blur(20px) saturate(250%);
+            -webkit-backdrop-filter: blur(20px) saturate(250%);
+            border-bottom: 1px solid rgba(255, 190, 130, 0.65);
+            box-shadow: 0 8px 32px rgba(200, 90, 20, 0.25);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            height: 64px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px #ff9f6e);
+            transition: transform 0.2s;
+            vertical-align: middle;
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6d350e;
+            font-size: 1.1rem;
+            font-weight: 550;
+            transition: all 0.2s;
+            padding: 0;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            letter-spacing: 0.8px;
+            text-shadow: 0 1px 3px rgba(255, 250, 230, 0.9);
+            line-height: 57px;
+        }
+
+        .nav-links a:hover {
+            color: #b1450a;
+            border-bottom-color: #ff7f4f;
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(190, 70, 20, 0.92);
+            backdrop-filter: blur(6px);
+            color: #fffef7;
+            padding: 18px 36px;
+            border-radius: 60px;
+            font-size: 1.35rem;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 10px 36px rgba(190, 60, 0, 0.5);
+            border: 1px solid rgba(255, 210, 130, 0.9);
+            letter-spacing: 1.5px;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 57px);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .center-logo {
+            max-width: 500px;
+            height: auto;
+            margin-bottom: 30px;
+            animation: subtle-float 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 12px 24px #ffaa66);
+            border-radius: 40px;
+        }
+
+        .greeting {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #9b3f0e;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 3px 3px 0 rgba(255, 215, 160, 0.5), 0 5px 15px #ffd8ae;
+            background: radial-gradient(ellipse at center, rgba(255,220,160,0.3) 0%, transparent 70%);
+            padding: 0 30px;
+            border-radius: 120px;
+        }
+
+        .welcome-text {
+            font-size: 2.2rem;
+            color: #b34e1a;
+            font-weight: 420;
+            background: rgba(255, 250, 230, 0.45);
+            backdrop-filter: blur(3px);
+            padding: 8px 48px;
+            border-radius: 60px;
+            box-shadow: 0 4px 18px rgba(255, 130, 60, 0.3);
+            border: 1px solid #ffc896;
+            margin-top: 15px;
+            line-height: 1.5;
+            letter-spacing: 1.8px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .greeting span {
+            animation: fadeIn 0.7s ease;
+            display: inline-block;
+        }
+
+        @keyframes subtle-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px) scale(1.02); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 24px;
+            }
+            .nav-logo {
+                height: 58px;
+            }
+            .nav-links {
+                gap: 24px;
+            }
+            .nav-links a {
+                font-size: 1rem;
+                line-height: 57px;
+            }
+            .center-logo {
+                max-width: 300px;
+            }
+            .greeting {
+                font-size: 2.8rem;
+                min-height: 70px;
+            }
+            .welcome-text {
+                font-size: 1.7rem;
+                padding: 6px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 16px;
+            }
+            .nav-logo {
+                height: 52px;
+            }
+            .nav-links {
+                gap: 16px;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+                line-height: 57px;
+            }
+            .center-logo {
+                max-width: 220px;
+            }
+            .greeting {
+                font-size: 2.2rem;
+                min-height: 60px;
+            }
+            .welcome-text {
+                font-size: 1.3rem;
+                padding: 5px 20px;
+            }
+        }
+
+        .festive-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 200, 100, 0.15) 0%, transparent 30%),
+                        radial-gradient(circle at 90% 20%, #ffc48920 0%, transparent 40%),
+                        radial-gradient(circle at 15% 90%, #ffbe76 0%, transparent 35%);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="photo/logo.png" alt="星星官网" class="nav-logo">
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">首页</a>
+            <a href="#" class="nav-link">关于我们</a>
+            <a href="#" class="nav-link">服务</a>
+            <a href="#" class="nav-link">联系我们</a>
+        </div>
+    </nav>
+
+    <div class="festive-glow"></div>
+    <div class="notification" id="notification"></div>
+
+    <div class="main-content">
+        <img src="photo/logo.png" alt="星星官网" class="center-logo">
+        <div class="greeting" id="greeting"></div>
+        <p class="welcome-text">欢迎回来</p>
+    </div>
+
+    <script>
+        (function() {
+            const greetings = [
+                "新年快乐",
+                "Happy New Year",
+                "Feliz Año Nuevo",
+                "Bonne année",
+                "Frohes neues Jahr",
+                "Felice Anno Nuovo",
+                "明けましておめでとうございます",
+                "새해 복 많이 받으세요",
+                "С Новым годом",
+                "عام جديد سعيد"
+            ];
+
+            let currentGreetingIndex = 0;
+            const greetingElement = document.getElementById('greeting');
+            const notification = document.getElementById('notification');
+
+            function updateGreeting() {
+                const newSpan = document.createElement('span');
+                newSpan.textContent = greetings[currentGreetingIndex];
+                greetingElement.innerHTML = '';
+                greetingElement.appendChild(newSpan);
+                currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+            }
+
+            function showNotification() {
+                notification.textContent = '敬请期待';
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 1500);
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showNotification();
+                });
+            });
+
+            updateGreeting();
+            setInterval(updateGreeting, 3500);
+        })();
+    </script>
+</body>
+</html>
